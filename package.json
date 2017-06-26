@@ -1,0 +1,22 @@
+{
+  "name": "express-study",
+  "version": "1.0.0",
+  "description": "",
+  "main": "app.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/qianduanwuzi/express-study.git"
+  },
+  "author": "wuzi",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/qianduanwuzi/express-study/issues"
+  },
+  "homepage": "https://github.com/qianduanwuzi/express-study#readme",
+  "dependencies": {
+    "express": "^4.15.3"
+  }
+}
