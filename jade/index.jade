@@ -1,0 +1,47 @@
+-  var friends = 10
+html
+    head
+        title!= title
+        <!--[if lte IE 8]> 
+        script.
+            alert("检测您当前浏览器版本过低，建议升级浏览器版本")
+        <![endif]-->
+        block scripts
+            script(src="abc")
+    body#app
+        block content
+            h1!= message
+            h1=message
+            //- id class
+            div#container.box
+            //- 多 div
+            #span
+            .span
+            //- 文本
+            p wuzi
+            p.
+                wuzi is 666
+                money is 888
+            //-  结合数据
+            #user #{name} &lt;#{email}&gt;
+            //- 内联标签
+            label Username:
+                input(name='user[name]')
+            //- case
+            //-  var friends = 10
+            case friends
+                when 0
+                    p you have no friends
+                default
+                    p you have #{friends} friends
+            //- 属性分隔符
+            a#alink(href="www.baidu.com")
+            .div(name="testDiv")
+            input(type="checkbox")
+            .Box
+                input(type="text") 
+            a(id= user.id)
+            a(name="#{user.id}")
+        block foot
+            #footer
+                p this is foot-block       

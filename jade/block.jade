@@ -1,0 +1,11 @@
+//- 模板继承
+extends ./index.jade
+
+block scripts
+  script(src='/jquery.js')
+  script(src='/pets.js')
+//- 使用 block append 或 block prepend 时 block 是可选的:
+//- append content ...
+block content
+    .block(name="this is block from index.jade")
+    

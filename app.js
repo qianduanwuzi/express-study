@@ -44,9 +44,21 @@ app.get('/out', function (req, res, next) {
     console.log('2')
 });
 //-------------------------------------------------------------end---------------------------
+app.get('/haha',function(req, res, next){
+    console.log('haha');
+    res.send('haha')
+})
+
 app.use(function (req, res, next) {
     console.log('--end--');
     next();
+})
+
+
+
+app.use(function(err, req, res, next){
+    console.log(err.stack);
+    res.status(500).send('Something broken')
 })
 
 var server = app.listen(7111, function () {
