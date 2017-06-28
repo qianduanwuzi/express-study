@@ -17,7 +17,10 @@
   },
   "homepage": "https://github.com/qianduanwuzi/express-study#readme",
   "dependencies": {
+    "cookie-parser": "^1.4.3",
+    "cookie-session": "^2.0.0-beta.2",
     "express": "^4.15.3",
-    "jade": "^1.11.0"
+    "jade": "^1.11.0",
+    "morgan": "^1.8.2"
   }
 }
