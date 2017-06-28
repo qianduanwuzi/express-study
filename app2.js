@@ -18,18 +18,18 @@ var urlencodedParser = app.use(bodyparser.urlencoded({ extended: false }));
 
 var jsonParser = app.use(bodyparser.json());
 
-app.use(cookieParser());
+app.use(cookieParser('secret'));
 
-app.use(cookieSession({
-    name: 'username',
-    keys:['wuzi'],
-    secret: 'key1',
-    cookie:{
-        maxAge: 2*60*1000,
-        domian:'localhost',
-        secure: true
-    }
-}));
+// app.use(cookieSession({
+//     name: 'username',
+//     keys:['wuzi'],
+//     secret: 'key1',
+//     cookie:{
+//         maxAge: 2*60*1000,
+//         domian:'localhost',
+//         secure: true
+//     }
+// }));
 
 
 
@@ -37,7 +37,24 @@ app.set('views', './jade');
 app.set('view engine', 'jade');
 app.set('trust proxy', true);
 
+app.get('/request',function(req, res, next){
+    console.log('baseUrl='+req.baseUrl);
+    console.log('hostname='+req.hostname); // localhost 服务器主机名(域名)
+    console.log('ip='+req.ip);
+    console.log('path='+req.path); // /request 路由
+    console.log('protocol='+req.protocol); // http 请求协议
+    console.log('req.query=',req.query); // {} get方式请求参数
+    console.log('req.route=',req.route);
+    console.log('cookie=',req.cookies);// {} cookies
+    res.send('request');
+    res.end();
+});
 
+app.get('/cookie',function(req, res){
+    console.log(req.signedCookies); // 签署过的cookie
+    res.cookie ('pwd','1234',{signed: true});
+    res.end()
+})
 
 // app.use(function (req, res, next) {
 //     res.setHeader('Content-Type', 'text/html')
