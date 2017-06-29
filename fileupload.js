@@ -16,6 +16,7 @@ app.post('/fileupload', function (req, res) {
     // 监听file事件获取文件（字段名，文件，文件名，传输，mime类型）
     busboy.on('file', function (fieldname, file, filename, encoding, mimetype) {
         console.log('filename: ' + filename)
+        console.log('mimetype: ' + mimetype)
         var writeStream = fs.createWriteStream('./upload/' + filename);
 
         //读取数据

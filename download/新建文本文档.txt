@@ -1,0 +1,190 @@
+var WebSite = React.createClass({
+	render: function() {
+             return (
+		    <div>
+		        <Name name={this.props.name} />
+			<Link site={this.props.site} />
+		    </div>
+ 		);
+  	}
+
+});
+
+var Name = React.createClass({
+	render: funciton(){
+	      return (
+		<h1>{this.props.name}</h1>
+	      );
+	}
+});
+
+var Link = React.createClass({
+	render: function(){
+		return (
+		  <a href={this.props.site}>
+			{this.props.site}
+		  </a>
+		);
+	}
+});
+
+
+React.render(
+	<WebSite name="wuzi" site="http://www.baidu.com" />,
+	document.getElementById('example')
+);
+
+---------------------------------------------------------------------------------
+var Counter = React.createClass({
+    getInitialState: function(){
+	return { clickCount: 0 };     //改变state的值会自动刷新组件
+    },
+	
+    handleClick: function(){
+	this.setState({clickCount:this.state.clickCount+1})
+    },
+
+    render: function(){
+	return (
+		<h2 onclick={this.handleClick}>{this.state.clickCount}</h2>
+	)
+    }
+});
+
+ReactDom.render(
+	<counter />,
+	document.getElementById('message')
+);
+
+
+-----------------------------------------------------------------------------------
+var Content = React.createClass({
+   render: function(){
+	return <div>
+		    <button onclick="{this.props.updata}" >点击我</button>
+		    <h4>{this.props.data}</h4>
+		</div>     
+}
+});
+
+var HelloMessage = React.createClass({
+	getInitialState: function() {
+		return (value: "hello message")
+	},
+	 handleChage: function(){
+	 this.setState({value: "菜鸟教程"})		
+ 	},
+	render : function(){
+	 var value={this.state.value};
+	 return <div>
+			<Content updata={this.handleChange} data={value}></Content>
+		</div>
+	}
+});
+
+React.render(<HelloMessage />,document.getElementById('example'))
+
+
+
+-------------------------------------------------------------------
+var re = new RegExp();
+var re = /^[1-9][0-9]$/;
+
+
+----------------------------------------------------------------------
+//tab切换组件
+<div>
+	<div>
+		<span v-for="(one,index) in datas" @click="onclickhandler(one,index)" > 
+			{{one[labelDep]}}
+		</span>
+	</div>
+</div>
+
+export default{
+	props:{
+            datas:{
+		type:Array,
+		default:[]
+            },
+	    labelDep:{
+		type:String,
+		default:"labelName"
+	    },		
+	}
+	methods:{
+	   oneclickhandler: function(d,index){
+		for(var i =0;i<datas.length;i++){
+			this.datas[i].show = false;
+			if(i==index) this.datas[i].show = true;
+		}
+         	this.$set("defaultindex",index);
+		this.$dispatch("tabclick",{data:d,index:index})
+            },	
+         }
+}
+
+
+//page实体
+<template>
+	<tabbar :datas="tabArray" @tabclick="tabClickHandler"><tabbar>
+	    <div v-for="(index,one) in tabArray">
+		<div v-show="tabArray[index].show">
+	
+		</div>
+	    </div>
+</template>
+let tabData=[{labelName:"tab1",show；false},{labelName:"tab2",show:false}]
+
+<script>
+	export default{
+		datas:{
+		       tabArray: tabData,
+			index:0
+		},
+		methods:{
+			tabClickHandler: function(d){
+			 	this.tabData[this.index].show = false;
+				d.data.show = true;
+				this.index = d.index;
+			}
+		}
+	}
+</script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
