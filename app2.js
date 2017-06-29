@@ -5,6 +5,7 @@ var morgan = require('morgan');
 var bodyparser = require('body-parser');
 var cookieParser = require('cookie-parser');
 var cookieSession = require('cookie-session');
+var Busboy = require('busboy');
 
 var port = 7113;
 app.locals.des = 'this is 本地变量';
@@ -46,6 +47,7 @@ app.get('/request',function(req, res, next){
     console.log('req.query=',req.query); // {} get方式请求参数
     console.log('req.route=',req.route);
     console.log('cookie=',req.cookies);// {} cookies
+    console.log('param=',req.param('xxx'))
     res.send('request');
     res.end();
 });
