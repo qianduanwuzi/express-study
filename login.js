@@ -4,6 +4,7 @@ var cookieParser = require('cookie-parser');
 var session = require('express-session');
 var bodyParser = require('body-parser');
 var fs = require('fs');
+var comment = require('./router/comment.js');
 
 var app = express();
 
@@ -23,8 +24,8 @@ app.use(cookieParser());
 // 根据cookie获取内存中的session
 app.use(session({
     secret: 'wuzi_login_demo', //一个String类型的字符串，作为服务器端生成session的签名。
-    // name: 'keyname', 返回客户端的key的名称，默认为connect.sid
-    cookie: {secure: false, maxAge: 30*60*1000},
+    name: 'lg_id', //返回客户端的key的名称，默认为connect.sid
+    cookie: {secure: false, maxAge: 1*60*1000},
     resave: true,
     saveUninitialized:true
 }));
@@ -32,19 +33,22 @@ app.use(session({
 //自定义中间件，用于判断用户是否登录和能否登录
 app.use(function(req, res, next){
     if(req.session.user){ //如果登陆过
+        console.log('=====1======')
         next()
     }else{ //没登录过
         //登录页面登录
         var name = req.body.name;
         var pwd = req.body.pwd;
+        console.log(req.body)
+        console.log(name,pwd)
         var noLogin = req.body.noLogin;
         var cookies = req.cookies; //直接跳过登录页面访问（曾经有登录过）
         if((name == 'wuzi' && pwd == '1234') || (cookies.name == 'wuzi' && cookies.pwd == '1234')){
             console.log('=====2=====')
             //当用户端勾选免登录
             if(noLogin == 'on'){
-                res.cookie('name',name,{maxAge: 30*60*1000});
-                res.cookie('pwd',pwd,{maxAge: 30*60*1000});
+                res.cookie('name',name,{maxAge: 1*60*1000});
+                res.cookie('pwd',pwd,{maxAge: 1*60*1000});
             }
             req.session.user = {name:name,pwd:pwd};
             next()
@@ -55,6 +59,8 @@ app.use(function(req, res, next){
         }
     }
 })
+
+app.use('/comment',comment)
 
 app.post('/success',function(req, res){
     res.send('login success')
